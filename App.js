@@ -12,11 +12,11 @@ app.options("*", cors());
 //middleware
 app.use(express.json());
 app.use(morgan("tiny"));
-// app.use('/', require('./routes/routes'));
+
 // app.use(authJwt());
 
 //Routes
-
+app.use('/', require('./routes/routes'));
 //Database
 const connectToDb = () => {
     DbConn.ConnectToDB()   // this function is to establish the connection with db
