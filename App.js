@@ -17,6 +17,7 @@ app.use(morgan("tiny"));
 
 //Routes
 app.use('/', require('./routes/routes'));
+
 //Database
 const connectToDb = () => {
     DbConn.ConnectToDB()   // this function is to establish the connection with db
