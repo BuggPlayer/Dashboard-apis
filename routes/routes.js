@@ -1,10 +1,28 @@
 // It will contains all the routes
 
-const express = require('express');
+const express = require("express");
+const {
+  addNewCategory,
+  getallCategory,
+  getSingleCategory,
+  updateCategory,
+  deleteCategory,
+} = require("../Controllers/CategoryController");
 const router = express.Router();
-const ProductController = require('../Controllers/ProductController')
 
+// category CURD
+router.post("/addcategory", addNewCategory);
+router.get("/", getallCategory);
+router.get("/category", getSingleCategory);
+router.put("/updatecategory", updateCategory);
+router.delete("/deletecategory", deleteCategory);
 
-router.post('/addproduct', ProductController.addNewProduct)
+// products CURD
+router.post("/addproduct", addNewCategory);
+router.get("/", getallCategory);
+router.get("/product", getSingleCategory);
+router.put("/updateproduct", updateCategory);
+router.delete("/deleteproduct", deleteCategory);
+
 
 module.exports = router;
