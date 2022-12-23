@@ -1,6 +1,6 @@
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
 
-const productSchema = mongoose.schema({
+const productSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -56,7 +56,7 @@ const productSchema = mongoose.schema({
   },
 
   category: {
-    type: mongoose.schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },

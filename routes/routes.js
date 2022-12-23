@@ -8,6 +8,13 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../Controllers/CategoryController");
+const {
+  addNewProduct,
+  getallProducts,
+  getSingleProduct,
+  updateProduct,
+  deleteProduct,
+} = require("../Controllers/ProductController");
 const router = express.Router();
 
 // category CURD
@@ -18,11 +25,10 @@ router.put("/updatecategory", updateCategory);
 router.delete("/deletecategory", deleteCategory);
 
 // products CURD
-router.post("/addproduct", addNewCategory);
-router.get("/", getallCategory);
-router.get("/product", getSingleCategory);
-router.put("/updateproduct", updateCategory);
-router.delete("/deleteproduct", deleteCategory);
-
+router.post("/addproduct", addNewProduct);
+router.get("/", getallProducts);
+router.get("/product", getSingleProduct);
+router.put("/updateproduct", updateProduct);
+router.delete("/deleteproduct", deleteProduct);
 
 module.exports = router;
