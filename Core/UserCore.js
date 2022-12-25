@@ -27,12 +27,12 @@ const getSingleuserCore = async (req, res) => {
 };
 
 const updateuserCore = async (req) => {
-  let updateCategory = new Category(
-    req.params.id,
+  let updateCategory = await User.findByIdAndUpdate(
+    req.body.id,
     {
       name: req.body.name,
       email: req.body.email,
-      passwordHash: bcrypt.hashSync(req.body.password, 10),
+      passwordHash: req.body.password && bcrypt.hashSync(req.body.password, 10),
       phone: req.body.phone,
       isAdmin: req.body.isAdmin,
       street: req.body.street,
@@ -43,7 +43,7 @@ const updateuserCore = async (req) => {
     },
     { new: true }
   );
-  return await updateCategory;
+  return updateCategory;
 };
 
 const deleteUserCore = (req) => {

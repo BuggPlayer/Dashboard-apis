@@ -43,6 +43,6 @@ const userSchema = mongoose.Schema({
   },
 });
 
-exports.Category = mongoose.model("User", userSchema);
+exports.User = mongoose.model("User", userSchema);
 
 //name color image

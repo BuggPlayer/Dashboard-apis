@@ -54,8 +54,10 @@ const productSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-
-  category: {
+  categoryName: {
+    type: String
+  },
+  categoryId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     required: true,
@@ -64,6 +66,10 @@ const productSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  status: {
+    type: String,
+    required: true
+  }
 });
 
 //name description richDescription mrp weight image images[] brand price

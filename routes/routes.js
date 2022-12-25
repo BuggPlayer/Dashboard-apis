@@ -1,49 +1,38 @@
 // It will contains all the routes
 
 const express = require("express");
-const {
-  addNewCategory,
-  getallCategory,
-  getSingleCategory,
-  updateCategory,
-  deleteCategory,
-} = require("../Controllers/CategoryController");
-const {
-  addNewProduct,
-  getallProducts,
-  getSingleProduct,
-  updateProduct,
-  deleteProduct,
-} = require("../Controllers/ProductController");
-const {
-  addNewUser,
-  getallUser,
-  getSingleuser,
-  updateuser,
-  deleteUser,
-} = require("../Controllers/UserController");
 const router = express.Router();
 
-// category CURD
-router.post("/addcategory", addNewCategory);
-router.get("/", getallCategory);
-router.get("/category", getSingleCategory);
-router.put("/updatecategory", updateCategory);
-router.delete("/deletecategory", deleteCategory);
+// All controller imports here...
+const ProductController = require('../Controllers/ProductController')
+const CategoryController = require("../Controllers/CategoryController");
+const UserController = require("../Controllers/UserController");
 
-// products CURD
-router.post("/addproduct", addNewProduct);
-router.get("/", getallProducts);
-router.get("/product", getSingleProduct);
-router.put("/updateproduct", updateProduct);
-router.delete("/deleteproduct", deleteProduct);
 
-// user CURD
-router.post("/adduser", addNewUser);
-router.get("/", getallUser);
-router.get("/user", getSingleuser);
-router.put("/updateuser", updateuser);
-router.delete("/deleteuser", deleteUser);
+// category
+router.post("/addcategory", CategoryController.addNewCategory);
+router.get("/allcategory", CategoryController.getallCategory);
+router.get("/category", CategoryController.getSingleCategory);
+router.put("/updatecategory", CategoryController.updateCategory);
+router.delete("/deletecategory/:id", CategoryController.deleteCategory);
+
+// products
+router.post("/addproduct", ProductController.addNewProduct);
+router.get("/product", ProductController.getSingleProduct);
+router.put("/updateproduct", ProductController.updateProduct);
+router.delete("/deleteproduct", ProductController.deleteProduct);
+router.get('/getProductCount', ProductController.getProductCount)
+router.post('/sortProducts', ProductController.sortProducts)
+router.post('/updateProductStatus', ProductController.productStatusUpdate)
+router.get('/product/search', ProductController.searchProduct)
+router.get("/allproducts", ProductController.getallProducts);
+
+// user
+router.post("/adduser", UserController.addNewUser);
+router.get("/allusers", UserController.getallUser);
+router.get("/user", UserController.getSingleuser);
+router.put("/updateuser", UserController.updateuser);
+router.delete("/deleteuser", UserController.deleteUser);
 
 
 module.exports = router;
