@@ -14,7 +14,8 @@ const createNewProduct = async (req) => {
     rating: req.body.rating,
     numOfReview: req.body.numOfReview,
     isFeatured: req.body.isFeatured,
-    categoryId: req.body.categoryId
+    categoryId: req.body.categoryId,
+    status: req.body.status
   });
   const isSaved = await category.save();
   if (!isSaved) {
@@ -33,8 +34,8 @@ const getSingleproductCore = async (req, res) => {
 };
 
 const updateproductCore = async (req) => {
-  let updateProduct = new Product(
-    req.params.id,
+  let updateProduct = await Product.findByIdAndUpdate(
+    req.body._id,
     {
       name: req.body.name,
       description: req.body.description,
@@ -51,11 +52,11 @@ const updateproductCore = async (req) => {
     },
     { new: true }
   );
-  return await updateProduct;
+  return updateProduct;
 };
 
 const deleteproductCore = (req) => {
-  const deleteproduct = Category.findByIdAndDelete(req.params.id);
+  const deleteproduct = Product.findByIdAndDelete(req.params.id);
   return deleteproduct;
 };
 

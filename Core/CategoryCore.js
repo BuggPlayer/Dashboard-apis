@@ -19,8 +19,8 @@ const getSingleCategoryCore = async (req, res) => {
 };
 
 const updateCategoryCore = async (req) => {
-  let updateCategory = new Category(
-    req.params.id,
+  let updateCategory = await Category.findByIdAndUpdate(
+    req.body.id,
     {
       name: req.body.name,
       color: req.body.color,
@@ -28,7 +28,7 @@ const updateCategoryCore = async (req) => {
     },
     { new: true }
   );
-  return await updateCategory;
+  return updateCategory;
 };
 
 const deleteCategoryCore = (req) => {

@@ -1,6 +1,6 @@
 const ProductCore = require("../Core/ProductCore");
 
-
+// add new product
 const addNewProduct = async (req, res) => {
     try {
         const result = await ProductCore.createNewProduct(req)
@@ -14,6 +14,44 @@ const addNewProduct = async (req, res) => {
 
 }
 
+// get all products data
+const getallProducts = async (req, res) => {
+    const getallproductdata = await ProductCore.getallproductCore();
+    if (!getallproductdata)
+        return res.status(400).json({ status: 'Failed', message: "Could not fetch all products" });
+    res.status(200).json({ status: 'Sucess', data: getallproductdata });
+};
+
+// get single products
+const getSingleProduct = async (req, res) => {
+    const singleproduct = await ProductCore.getSingleproductCore(req);
+    if (!singleproduct)
+        return res.status(400).json({ message: "The category with the given ID was not found." });
+    res.status(200).json({ status: 'Sucess', data: singleproduct });
+};
+
+// put single catgory
+const updateProduct = async (req, res) => {
+    const updateproduct = await ProductCore.updateproductCore(req);
+    console.log('updateproduct', updateproduct);
+    if (!updateproduct)
+        return res.status(400).json({
+            message: "The updateproduct with the given ID was not found.",
+        });
+    res.status(200).json({ status: 'Sucess', data: updateproduct });
+};
+
+// delete single product
+const deleteProduct = async (req, res) => {
+    const deteleproduct = await ProductCore.deleteproductCore(req);
+    if (!deteleproduct)
+        return res.status(400).json({
+            message: "The category with the given ID was not found.",
+        });
+    res.status(200).json({ success: true, message: "the category is deleted!" });
+};
+
+// get the total count of products
 const getProductCount = async (req, res) => {
     try {
         const countofProducts = await ProductCore.getAllProductCount(req)
@@ -89,6 +127,16 @@ const searchProduct = async (req, res) => {
     } catch (error) {
         return res.status(400).json({ status: 'Failed', message: error.message })
     }
-
 }
-module.exports = { addNewProduct, getProductCount, sortProducts, productStatusUpdate, searchProduct }
+
+module.exports = {
+    addNewProduct,
+    getallProducts,
+    getSingleProduct,
+    updateProduct,
+    deleteProduct,
+    getProductCount,
+    sortProducts,
+    productStatusUpdate,
+    searchProduct
+};
