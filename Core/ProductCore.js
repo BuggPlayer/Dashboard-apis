@@ -1,6 +1,6 @@
 const { Product } = require("../Models/Product");
 
-const createNewProduct = async (req, res) => {
+const createNewProduct = async (req) => {
   let category = new Product({
     name: req.body.name,
     description: req.body.description,
@@ -14,8 +14,13 @@ const createNewProduct = async (req, res) => {
     rating: req.body.rating,
     numOfReview: req.body.numOfReview,
     isFeatured: req.body.isFeatured,
+    categoryId: req.body.categoryId
   });
-  return await category.save();
+  const isSaved = await category.save();
+  if (!isSaved) {
+    return false
+  }
+  return true;
 };
 
 const getallproductCore = async () => {
@@ -54,10 +59,30 @@ const deleteproductCore = (req) => {
   return deleteproduct;
 };
 
+const getAllProductCount = async (req) => {
+  return await Product.countDocuments()
+}
+
+const sortProducts = async (sort) => {
+  return await Product.find().sort(sort)
+}
+
+const updateProductStatus = async (query, values) => {
+  await Product.updateOne(query, values)
+}
+
+
+const searchProduct = async (query) => {
+  return await Product.find(query)
+}
 module.exports = {
   createNewProduct,
   getallproductCore,
   getSingleproductCore,
   updateproductCore,
   deleteproductCore,
+  getAllProductCount,
+  sortProducts,
+  updateProductStatus,
+  searchProduct
 };

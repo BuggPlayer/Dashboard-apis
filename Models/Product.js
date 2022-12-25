@@ -1,6 +1,6 @@
-const mongoose = require(mongoose);
+const mongoose = require('mongoose');
 
-const productSchema = mongoose.schema({
+const productSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -54,9 +54,12 @@ const productSchema = mongoose.schema({
     type: Boolean,
     default: false,
   },
+  categoryName: {
+    type: String
+  },
 
-  category: {
-    type: mongoose.schema.Types.ObjectId,
+  categoryId: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
     required: true,
   },
@@ -64,6 +67,10 @@ const productSchema = mongoose.schema({
     type: Date,
     default: Date.now(),
   },
+  status: {
+    type: String,
+    required: true
+  }
 });
 
 //name description richDescription mrp weight image images[] brand price
