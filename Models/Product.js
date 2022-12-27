@@ -54,13 +54,10 @@ const productSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  categoryName: {
-    type: String
-  },
-  categoryId: {
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
-    required: true,
+    // required: true,
   },
   dateCreate: {
     type: Date,
@@ -72,7 +69,5 @@ const productSchema = mongoose.Schema({
   }
 });
 
-//name description richDescription mrp weight image images[] brand price
-//count-in-stock rating numsofreviw isFeatured dateCreated
 
 exports.Product = mongoose.model("Product", productSchema);

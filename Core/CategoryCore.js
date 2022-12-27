@@ -20,7 +20,7 @@ const getSingleCategoryCore = async (req, res) => {
 
 const updateCategoryCore = async (req) => {
   let updateCategory = await Category.findByIdAndUpdate(
-    req.body.id,
+    req.params.id,
     {
       name: req.body.name,
       color: req.body.color,

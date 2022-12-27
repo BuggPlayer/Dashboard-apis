@@ -5,6 +5,9 @@ const cors = require("cors");
 require("dotenv/config");
 
 const DbConn = require('./Database/dbcon')
+// for more data
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb', extended: true}));
 
 app.use(cors());
 app.options("*", cors());
