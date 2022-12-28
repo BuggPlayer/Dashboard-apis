@@ -14,6 +14,7 @@ const createNewUserCore = async (req, res) => {
     city: req.body.city,
     country: req.body.country,
   });
+
   return await user.save();
 };
 
@@ -46,6 +47,13 @@ const updateuserCore = async (req) => {
   return updateCategory;
 };
 
+
+const checkUserExistence = async (email) => {
+  const isUserExist = await User.find({ email })
+  if (!isUserExist) return false
+  return true;
+}
+
 const deleteUserCore = (req) => {
   const deletecategory = User.findByIdAndDelete(req.params.id);
   return deletecategory;
@@ -57,4 +65,5 @@ module.exports = {
   getSingleuserCore,
   updateuserCore,
   deleteUserCore,
+  checkUserExistence,
 };
