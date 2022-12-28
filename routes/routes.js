@@ -7,6 +7,7 @@ const router = express.Router();
 const ProductController = require("../Controllers/ProductController");
 const CategoryController = require("../Controllers/CategoryController");
 const UserController = require("../Controllers/UserController");
+const AuthController = require('../Controllers/AuthController')
 
 // category
 router.post("/addcategory", CategoryController.addNewCategory);
@@ -32,5 +33,8 @@ router.get("/allusers", UserController.getallUser);
 router.get("/user", UserController.getSingleuser);
 router.put("/updateuser", UserController.updateuser);
 router.delete("/deleteuser", UserController.deleteUser);
+
+// auth
+router.post('/auth/login', AuthController.dashboardLogin)
 
 module.exports = router;

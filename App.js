@@ -3,6 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 require("dotenv/config");
+var cookieParser = require('cookie-parser');
 
 const DbConn = require('./Database/dbcon')
 // for more data
@@ -15,7 +16,7 @@ app.options("*", cors());
 //middleware
 app.use(express.json());
 app.use(morgan("tiny"));
-
+app.use(cookieParser());
 // app.use(authJwt());
 
 //Routes
