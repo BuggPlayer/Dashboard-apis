@@ -14,18 +14,18 @@ const createNewProduct = async (req) => {
     rating: req.body.rating,
     numOfReview: req.body.numOfReview,
     isFeatured: req.body.isFeatured,
-    categoryId: req.body.categoryId,
-    status: req.body.status
+    category: req.body.categoryId,
+    status: req.body.status,
   });
   const isSaved = await category.save();
   if (!isSaved) {
-    return false
+    return false;
   }
   return true;
 };
 
 const getallproductCore = async () => {
-  return await Product.find();
+  return await Product.find().populate("category");
 };
 
 const getSingleproductCore = async (req, res) => {
@@ -35,7 +35,7 @@ const getSingleproductCore = async (req, res) => {
 
 const updateproductCore = async (req) => {
   let updateProduct = await Product.findByIdAndUpdate(
-    req.body._id,
+    req.params.id,
     {
       name: req.body.name,
       description: req.body.description,
@@ -61,21 +61,20 @@ const deleteproductCore = (req) => {
 };
 
 const getAllProductCount = async (req) => {
-  return await Product.countDocuments()
-}
+  return await Product.countDocuments();
+};
 
 const sortProducts = async (sort) => {
-  return await Product.find().sort(sort)
-}
+  return await Product.find().sort(sort);
+};
 
 const updateProductStatus = async (query, values) => {
-  await Product.updateOne(query, values)
-}
-
+  await Product.updateOne(query, values);
+};
 
 const searchProduct = async (query) => {
-  return await Product.find(query)
-}
+  return await Product.find(query);
+};
 module.exports = {
   createNewProduct,
   getallproductCore,
@@ -85,5 +84,5 @@ module.exports = {
   getAllProductCount,
   sortProducts,
   updateProductStatus,
-  searchProduct
+  searchProduct,
 };
